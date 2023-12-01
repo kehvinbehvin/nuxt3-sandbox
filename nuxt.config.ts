@@ -1,5 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 // @ts-ignore
+// @ts-ignore
 export default defineNuxtConfig({
   runtimeConfig: {
     // Private config that is only available on the server
@@ -9,4 +10,9 @@ export default defineNuxtConfig({
       apiBase: 'https://jsonplaceholder.typicode.com'
     }
   },
+  public: [
+      '~/plugins/oFetch',
+      '~/plugins/apiFactory',
+      '~/plugins/clickAway',
+  ]
 })
