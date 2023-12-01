@@ -1,7 +1,7 @@
 import postFactory from "./post"
 
-const apiFactory = (oFetch) => ({
-    post: postFactory(oFetch)
+const apiFactory = (oFetch, config) => ({
+    post: postFactory(oFetch, config)
 });
 
 export default apiFactory

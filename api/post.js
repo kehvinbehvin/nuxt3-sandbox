@@ -1,11 +1,11 @@
-const postFactory = (oFetch) => ({
+const postFactory = (oFetch, config) => ({
     getPost(id) {
-        return oFetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+        return oFetch(`${config.public.apiBase}/posts/${id}`, {
             method: "GET"
         })
     },
     getPosts() {
-        return oFetch("https://jsonplaceholder.typicode.com/posts", {
+        return oFetch(`${config.public.apiBase}/posts`, {
             method: "GET"
         })
     }
