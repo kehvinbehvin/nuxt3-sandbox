@@ -3,11 +3,11 @@
     Hello world
     <p>{{$config.public.apiBase}}</p>
   </div>
-  <div v-for="item in data">
+  <template v-for="item in data" :key="item.id">
     <div>
       {{ item.id }}
     </div>
-  </div>
+  </template>
 </template>
 
 <script>
