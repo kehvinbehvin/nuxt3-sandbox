@@ -11,5 +11,15 @@ export default defineNuxtConfig({
         '~/plugins/oFetch',
         '~/plugins/apiFactory',
         '~/plugins/clickAway',
-    ]
+    ],
+    css: ["@/assets/scss/global.scss"],
+    vite: {
+        css: {
+            preprocessorOptions: {
+                scss: {
+                    additionalData: '@use "@/assets/scss/_vars.scss" as *;',
+                },
+            },
+        },
+    },
 })

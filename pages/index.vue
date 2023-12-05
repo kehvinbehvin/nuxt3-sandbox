@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="k-content">
     Hello world
     <p>{{$config.public.apiBase}}</p>
   </div>
@@ -25,3 +25,8 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+.k-content {
+  @include k-border-debug;
+}
+</style>
