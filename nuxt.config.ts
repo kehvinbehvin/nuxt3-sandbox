@@ -12,12 +12,17 @@ export default defineNuxtConfig({
         '~/plugins/apiFactory',
         '~/plugins/clickAway',
     ],
-    css: ["@/assets/scss/global.scss"],
+    css: ["~/assets/styles/index.scss"],
     vite: {
+        // Documentation in https://vitejs.dev/config/build-options#build-sourcemap
+        // build: {
+        //   sourcemap: false
+        // },
         css: {
             preprocessorOptions: {
                 scss: {
-                    additionalData: '@use "@/assets/scss/_vars.scss" as *;',
+                    // Syntax suggested here https://stackoverflow.com/questions/68131954/how-to-use-sass-using-in-vuejs3-vite
+                    additionalData: '@import "~/assets/styles/variables"; @import "~/assets/styles/mixins";'
                 },
             },
         },
