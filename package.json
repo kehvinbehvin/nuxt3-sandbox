@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "vue-recaptcha": "^3.0.0-alpha.2",
+    "vue-slider-component": "^4.1.0-beta.7",
     "vue-vimeo-player": "^1.1.2",
     "vue3-click-away": "^1.2.4",
     "vue3-youtube": "^0.1.9"
