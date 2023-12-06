@@ -4,7 +4,11 @@ export default defineNuxtConfig({
         apiSecret: '123',
         // Config within public will be also exposed to the client
         public: {
-            apiBase: 'https://jsonplaceholder.typicode.com'
+            apiBase: 'https://jsonplaceholder.typicode.com',
+            recaptcha: {
+                v2SiteKey: process.env.RECAPTCHA_SITE_KEY,
+                v3SiteKey: process.env.RECAPTCHA_SITE_KEY
+            }
         }
     },
     public: [
@@ -27,4 +31,13 @@ export default defineNuxtConfig({
             },
         },
     },
+    build: {
+        transpile: ["vue-recaptcha"],
+    },
+    modules: ['vue-recaptcha/nuxt'],
+    // vue: {
+    //     compilerOptions: {
+    //         isCustomElement: (tag: string) => ['ThemeButton', 'RecaptchaCheckbox'].includes(tag),
+    //     }
+    // }
 })
