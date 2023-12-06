@@ -5,12 +5,8 @@
     </Suspense>
   </div>
 </template>
-<script>
+<script setup>
 import { useRecaptchaProvider } from 'vue-recaptcha'
 
-export default {
-  setup() {
-    useRecaptchaProvider()
-  }
-}
+useRecaptchaProvider()
 </script>

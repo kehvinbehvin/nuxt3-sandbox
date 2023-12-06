@@ -7,7 +7,7 @@ export default defineNuxtConfig({
             apiBase: 'https://jsonplaceholder.typicode.com',
             recaptcha: {
                 v2SiteKey: process.env.RECAPTCHA_SITE_KEY,
-                v3SiteKey: process.env.RECAPTCHA_SITE_KEY
+                v3SiteKey: process.env.RECAPTCHA_SITE_KEY,
             }
         }
     },
