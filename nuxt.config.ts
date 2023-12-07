@@ -11,11 +11,6 @@ export default defineNuxtConfig({
             }
         }
     },
-    public: [
-        '~/plugins/oFetch',
-        '~/plugins/apiFactory',
-        '~/plugins/clickAway',
-    ],
     css: ["~/assets/styles/index.scss"],
     vite: {
         // Documentation in https://vitejs.dev/config/build-options#build-sourcemap
