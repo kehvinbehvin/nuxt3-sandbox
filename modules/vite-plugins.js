@@ -1,5 +1,6 @@
 import { defineNuxtModule, addVitePlugin } from 'nuxt/kit'
 import babel from 'vite-plugin-babel';
+import svgLoader from 'vite-svg-loader'
 
 export default defineNuxtModule({
     meta: {
@@ -14,5 +15,7 @@ export default defineNuxtModule({
                 ]
             }
         }))
+
+        addVitePlugin(svgLoader())
     }
 })
