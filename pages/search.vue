@@ -12,32 +12,16 @@ export default {
     return {
       results: {},
       userInput: "",
-
-      controller: null,
     }
   },
   methods: {
     async userInputHandler(userInput) {
-	  if (this.controller !== null) {
-		console.log("ABORTING", this.controller.signal)
-		this.controller.abort("User searching like mad")
-	  }
-
-      const { $abortController } = useNuxtApp();
-      const controller = new $abortController() 
-	  console.log("Searching")
-
       const { $api } = useNuxtApp()
-
-      this.controller = controller
-	  console.log("SIGNAL BEFORE:", controller.signal)
-
-      this.results = await $api.product.searchProduct(userInput, {
-        signal: controller.signal
-      })
-	  this.controller = null
-
-	  console.log("SIGNAL COMPLETED: ")
+	  try {
+		this.results = await $api.product.searchProduct(userInput)
+	  } catch (error) {
+		console.log(error)
+	  }
     },
     debounceUserInput(e) {
       console.log("Debouncing", e.target.value)
