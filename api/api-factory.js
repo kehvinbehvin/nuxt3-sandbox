@@ -1,7 +1,9 @@
 import postFactory from "./post"
+import productFactory from "./product.js";
 
-const apiFactory = (oFetch, config) => ({
-    post: postFactory(oFetch, config)
+const apiFactory = (oFetchKit, config) => ({
+    post: postFactory(oFetchKit, config),
+    product: productFactory(oFetchKit, config)
 });
 
 export default apiFactory

@@ -1,4 +1,4 @@
-import {ofetch} from 'ofetch'
+import {ofetch, AbortController} from 'ofetch'
 
 export default defineNuxtPlugin(nuxtApp => {
     const instance = ofetch.create({
@@ -15,7 +15,8 @@ export default defineNuxtPlugin(nuxtApp => {
 
     return {
         provide: {
-            oFetch: instance
+            oFetch: instance,
+            abortController: AbortController,
         }
     }
 })
