@@ -27,7 +27,7 @@ export default defineNuxtConfig({
         },
     },
     build: {
-        transpile: ["vue-recaptcha"],
+        transpile: ["vue-recaptcha", "dropzone-vue3"],
     },
     modules: ['vue-recaptcha/nuxt'],
     // vue: {
