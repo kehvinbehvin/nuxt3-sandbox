@@ -1,6 +1,6 @@
 <template>
   <div ref="firstName">
-    First Name<input type="text" v-model="this.v$.firstName.$model" @input="logger" @blur="this.v$.firstName.$touch">
+    First Name<input type="text" v-model="this.firstName" @input="logger" @blur="this.v$.firstName.$touch">
     {{this.firstName}}
     <p>This field is dirty {{ this.v$.firstName.$anyDirty }}</p>
     <p>This field is dirty {{ this.v$.firstName.$dirty }}</p>
@@ -22,6 +22,28 @@
     <p>This field should only show error after dirty and still invalid {{ this.v$.contact.email.$error }}</p>
   </div>
   <inner-form ref="inner-form" />
+
+  <ValidateEach
+      v-for="(item, index) in collection"
+      :key="index"
+      :state="item"
+      :rules="rules"
+  >
+    <template #default="{ v: v$ }">
+      <div>
+        <input
+            v-model="v$.name.$model"
+            type="text"
+        >
+        <div
+            v-for="(error, errorIndex) in v$.name.$errors"
+            :key="errorIndex"
+        >
+          {{ error.$message }}
+        </div>
+      </div>
+    </template>
+  </ValidateEach>
   <div @click="submit">
     Submit
   </div>
@@ -34,19 +56,39 @@
 </template>
 <script>
 import { useVuelidate } from '@vuelidate/core'
-import { required, email } from '@vuelidate/validators'
+import { required, email, minLength } from '@vuelidate/validators'
 import InnerForm from "./innerForm.vue";
 import validations from "../mixins/validations.js";
+import { ValidateEach } from '@vuelidate/components'
+import { reactive } from "vue";
 
 export default {
   components: {
-    InnerForm
+    InnerForm,
+    ValidateEach
   },
   mixins: [
     validations
   ],
   setup () {
-    return { v$: useVuelidate() }
+    const rules = {
+      name: {
+        required,
+        minLength: minLength(10)
+      }
+    }
+
+    const collection = reactive([
+      { name: 'foo' },
+      { name: 'bar' },
+    ])
+
+    const v$ = useVuelidate()
+    return {
+      rules,
+      collection,
+      v$
+    }
   },
   data () {
     return {
@@ -71,7 +113,7 @@ export default {
   },
   methods: {
     logger() {
-      console.log("V$: ", this.v$.firstName)
+      console.log("v: ", this.v$.firstName)
       console.log("Refs: ", this.$refs)
     },
     submit() {
