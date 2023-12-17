@@ -21,7 +21,7 @@
     <p>This field should be invalid invalid {{ this.v$.contact.email.$invalid }}</p>
     <p>This field should only show error after dirty and still invalid {{ this.v$.contact.email.$error }}</p>
   </div>
-  <inner-form ref="inner-form" />
+  <inner-form ref="inner-form" :entity="entity"/>
 
   <ValidateEach
       v-for="(item, index) in collection"
@@ -31,6 +31,7 @@
   >
     <template #default="{ v: v$ }">
       <div>
+        Validate Each component:
         <input
             v-model="v$.name.$model"
             type="text"
@@ -44,6 +45,14 @@
       </div>
     </template>
   </ValidateEach>
+  <div ref="computed-form">
+    Company name<input type="text" v-model="this.testDescription" @input="changeDescription" @blur="this.v$.testDescription.$touch">
+    {{this.testDescription}}
+    <p>This field is dirty {{ this.v$.testDescription.$anyDirty }}</p>
+    <p>This field should be invalid invalid {{ this.v$.testDescription.$invalid }}</p>
+    <p>This field should only show error after dirty and still invalid {{ this.v$.testDescription.$error }}</p>
+  </div>
+
   <div @click="submit">
     Submit
   </div>
@@ -52,6 +61,9 @@
   </div>
   <div @click="checkDirt">
     isDirty? {{ this.dusty }}
+  </div>
+  <div @click="toggleEntityName">
+    Toggle entity name
   </div>
 </template>
 <script>
@@ -72,10 +84,7 @@ export default {
   ],
   setup () {
     const rules = {
-      name: {
-        required,
-        minLength: minLength(10)
-      }
+      name: {}
     }
 
     const collection = reactive([
@@ -97,9 +106,17 @@ export default {
       contact: {
         email: ''
       },
+      companyName: "",
 
       // None validation
       dusty: false,
+
+      // Data
+      entity: {
+        name: true,
+        role: "hello"
+      },
+      descript: ""
     }
   },
   validations () {
@@ -108,6 +125,12 @@ export default {
       lastName: { required },
       contact: {
         email: { required, email }
+      },
+      companyName: {
+        required
+      },
+      testDescription: {
+        required
       }
     }
   },
@@ -126,6 +149,20 @@ export default {
     checkDirt() {
       console.log("Checking all dirty, will be true as long 1 is dirty")
       this.dusty = this.isDirty()
+    },
+    toggleEntityName() {
+      return !this.entity.name
+    }
+  },
+  computed: {
+    company() {
+      return this.companyName
+    },
+    changeDescription(event) {
+      this.descript = event.target.value
+    },
+    testDescription() {
+      return this.descript
     }
   }
 }
